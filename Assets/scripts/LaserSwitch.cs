@@ -12,7 +12,7 @@ public class LaserSwitch : MonoBehaviour
     [SerializeField] UnityEvent _off;
 
     SpriteRenderer _spriteRenderer;
-
+    bool _isOn;
 
     void Start()
     {
@@ -34,13 +34,21 @@ public class LaserSwitch : MonoBehaviour
 
     private void TurnOff()
     {
-        _spriteRenderer.sprite = _left;
-        _off.Invoke();
+        if (_isOn)
+        {
+            _isOn = false;
+            _spriteRenderer.sprite = _left;
+            _off.Invoke();
+        }
     }
 
     private void TurnOn()
     {
-        _spriteRenderer.sprite = _right;
-        _on.Invoke();
+        if (_isOn == false)
+        {
+            _isOn = true;
+            _spriteRenderer.sprite = _right;
+            _on.Invoke();
+        }
     }
 }
